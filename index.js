@@ -26,15 +26,30 @@ class AppUpdate {
       });
   }
 
+//   getApkVersion() {
+//     if (jobId !== -1) {
+//       return;
+//     }
+//     if (!this.options.apkVersionUrl) {
+//       console.log("apkVersionUrl doesn't exist.");
+//       return;
+//     }
+//     this.GET(this.options.apkVersionUrl, this.getApkVersionSuccess.bind(this), this.getVersionError.bind(this));
+//   }
+  
   getApkVersion() {
     if (jobId !== -1) {
       return;
     }
-    if (!this.options.apkVersionUrl) {
-      console.log("apkVersionUrl doesn't exist.");
+    if (!this.options.apkUrl) {
+      console.log("apkUrl doesn't exist.");
       return;
     }
-    this.GET(this.options.apkVersionUrl, this.getApkVersionSuccess.bind(this), this.getVersionError.bind(this));
+    this.getApkVersionSuccess({
+        "versionName":"1.0.0.0",
+        "apkUrl":"https://dev2.egusi.com.hk/pub/fungretail/dd/releases/apk/fr_dd_1_0_0_20.apk",
+        "forceUpdate": true
+    })
   }
 
   getApkVersionSuccess(remote) {
@@ -129,7 +144,15 @@ class AppUpdate {
     this.options.onError && this.options.onError();
   }
 
-  checkUpdate() {
+//   checkUpdate() {
+//     if (Platform.OS === 'android') {
+//       this.getApkVersion();
+//     } else {
+//       this.getAppStoreVersion();
+//     }
+//   }
+  
+  checkUpdate(){
     if (Platform.OS === 'android') {
       this.getApkVersion();
     } else {
